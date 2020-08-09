@@ -1,0 +1,169 @@
+*{
+ box-sizing:border-box;
+
+}
+body{
+ width:100%;
+ height:auto;
+ margin:0;
+ background-color:#F7F7F7;
+}
+.header{
+ width:100%;
+ height:80px;
+ float:left;
+ background: rgb(27,143,193);
+background: linear-gradient(180deg, rgba(27,143,193,1) 0%, rgba(79,173,214,1) 52%, rgba(79,173,214,1) 77%);
+}
+.timer{
+ height:80px;
+ width:30%;
+ float:left;
+ text-align:center;
+}
+
+.time,.live{
+ width:30%;
+ height:80px;
+ float:left;
+ text-align:center;
+ line-height:80px;
+ font-size:1.8em;
+ color:#ffffff;
+ 
+}
+.live{
+  text-align:left;
+  font-weight:bold;
+  font-family:calibri;
+ }
+.start-again{
+ float:left;
+ width:30%;
+ height:80px;
+ text-align:left;
+ font-size:1em;
+ color:#ffffff;
+}
+#rotate2{
+ cursor:pointer;
+ line-height:80px;
+}
+
+.choose-time{
+ float:right;
+ width:20%;
+ height:80px;
+}
+.choose-time select{
+  width:50%;
+  height:30px;
+  margin-top:25px;
+  border-radius:3px;
+  border:none;
+  padding:5px;
+  float:left;
+  }
+.choose-time button{
+ width:30%;
+ height:25px;
+ border:none;
+ border-radius:3px;
+ margin-top:27.5px;
+ float:left;
+ margin-left:5%;
+}
+  
+  
+.work{
+ width:70%;
+ float:left;
+ height:400px;
+ margin-left:15%;
+ margin-top:50px;
+ overflow-y:scroll;
+background-color:#ffffff;
+padding:5px;
+border-radius:3px;
+box-shadow:0px 2px 2px rgba(195, 201, 197,0.4);
+}
+.work {
+    overflow-y: scroll;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+.work::-webkit-scrollbar { /* WebKit */
+    width: 0;
+    height: 0;
+}
+span{
+ background-color:#ffffff;
+ width:3%;
+ padding:1px;
+margin-top:2px;
+ height:50px;
+ float:left;
+ margin-left:.2%;
+ text-align:center;
+ border-radius:3px;
+ line-height:50px;
+ color:#4A4A4A;
+ font-size:1.8em;
+ font-family: pt-mono,Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace;
+}
+
+/*modal css starts here*/
+ .modal{
+  position:absolute;
+  height:500px;
+  width:500px;
+  background-color:#ffffff;
+  margin:auto;
+  top:0;bottom:0;left:0;right:0;
+  box-shadow:0px 2px 2px rgba(0,0,0,0.4);
+  border-radius:4px;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.3s linear;
+ }
+ 
+ .cutter{
+  width:100%;
+  height:30px;
+  float:left;
+ }
+ .cutter i{
+  float:right;
+  display:block;
+  color:gray;
+  margin:0;
+  line-height:30px;
+  margin-right:10px;
+  cursor:pointer;
+ }
+ .speed{
+  width:50%;
+  height:100px;
+  float:left;
+  margin-left:25%;
+ }
+ .speed img{
+  width:100%;
+  height:100px;
+ }
+ .gross-wpm,.net-wpm{
+  width:50%;
+  height:100px;
+  float:left;
+ 
+ }
+ .gross-wpm p,.net-wpm p{
+  font-weight:bold;
+  color:mediumseagreen;
+  text-align:center;
+  font-size:1.5em;
+  font-family:calibri;
+  margin:0;
+  line-height:100px;
+ }
+/*modal css ends here*/

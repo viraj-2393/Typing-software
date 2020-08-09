@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>Learn JQuery</title>
+  <link rel="stylesheet" type="text/css" href="key.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src = "https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+ </head>
+ <body>
+  <div class="header">
+
+    <div class="timer">
+	  <div class="time">Time: </div>
+	  <div class="live" id='set-time'>2:00</div>
+	  <div class="start-again"><i class="fa fa-rotate-left" id ="rotate2"></i></div>
+	</div>
+	
+	<!--<div class="choose-time">
+	  <select id="number">
+	    <option value="1">1 min</option>
+		<option value="2" >2 min</option>
+		<option value="3" >3 min</option>
+		
+	  </select>
+	  <button onclick="call_deserving()">Apply</button>
+	</div>-->
+  </div>
+  <div class="work">All along it was a fever
+				A cold sweat, hot headed believer
+				I threw my hands in the air, said, "Show me something"
+				He said, "If you dare, come a little closer"
+
+				Round and around and around and around we go
+				Oh, now tell me now, tell me now, tell me now you know
+
+				Not really sure how to feel about it
+				Something in the way you move
+				Makes me feel like I can't live without you
+				It takes me all the way
+				I want you to stay
+
+				It's not much of a life you're living
+				It's not just something you take, it's given
+
+				Round and around and around and around we go
+				Oh, now tell me now, tell me now, tell me now you know
+
+				Not really sure how to feel about it
+				Something in the way you move
+				Makes me feel like I can't live without you
+				It takes me all the way
+				And I want you to stay
+
+				Ooh, the reason I hold on
+				Ooh, 'cause I need this hole gone
+				Well, funny you're the broken one 
+				But I'm the only one who needed saving
+				'Cause when you never see the light 
+				It's hard to know which one of us is caving
+
+				Not really sure how to feel about it
+				Something in the way you move
+				Makes me feel like I can't live without you
+				It takes me all the way
+				I want you to stay
+				Stay
+				I want you to stay
+				Ooh</div>
+    
+	<div class="modal">
+	  <div class="cutter"><i class="fa fa-times" aria-hidden="true" id = "cutter"></i></div>
+	  <div class="speed">
+	   <img src="speed.svg"></img>
+	  </div>
+	  <div class="gross-wpm">
+	     <p id="wpm"></p>
+	  </div>
+	  <div class="net-wpm">
+	     <p id="net-wpm"></p>
+	  </div>
+	  <div class="net-wpm">
+	     <p id="accuracy"></p>
+	  </div>
+	</div>
+ </body>
+ <script>
+
+ //all variables to be used are declared here
+	var id = 1;	
+	var next = 1;
+	var seconds = 120;
+	var time = 2;
+	var y = 5;
+	var flag = 1;
+	var entries = 0;
+	var wrong_entries = 0;
+ 	var myfunc;
+ //-------------------
+    
+	$(document).ready(function(){
+	$(".work").each(function (index) {
+	var characters = $(this).text().replace(/\s+/g, " ").split("");
+
+	$this = $(this);
+	$this.empty();
+	
+	$.each(characters, function (i, el) {
+	$this.append("<span id='ab"+id+"'>" + el + "</span>");
+	id++;
+	});});
+     
+	  
+	});
+	
+
+	
+ $(document).on("keypress", function(e){
+        /*timer code execution*/
+        if(flag == 1){chalu();flag = 0;}
+		/*timer code execution ends here*/
+        var name= "#ab"+next;
+        var c = String.fromCharCode(e.which);
+		var temp = $(name).text();
+		if(next % 31 == 0){
+		   //your current y position on the page
+		   y = y+52;
+         $(".work").animate({ scrollTop: y });
+		}
+		if(c == temp){$(name).css("background-color","#EDF7E7");$(name).css("color","#95C590"); entries++;}
+		else{$(name).css("background-color","#FFDCD9");$(name).css("color","#D55B60");
+		 $(name).effect( "shake", { direction: "right", times: 2, distance: 5}, 300 );
+		 wrong_entries++;
+		 //next--;
+		}
+		next++;
+    });
+	
+	/*timer code starts here */
+
+	function chalu(){
+	    myfunc = setInterval(function() {
+			if(seconds > 0){
+				seconds = seconds - 1;
+				document.getElementById('set-time').innerHTML= seconds;
+			}
+			else{
+				stoptimer();
+			}
+		}, 1000);
+		
+	}
+	
+
+	function stoptimer(){
+	 clearInterval(myfunc);
+	 $(document).off('keypress');
+	 $(".modal").css("visibility","visible");
+	 $(".modal").css("opacity","1");
+	 $(".work").css("filter","blur(1px)");
+	 
+	 //get all the information
+	   information();
+	 //information ends here
+	}
+	/*timer code ends here*/
+	
+	/*reset the timer code starts here*/
+	 $('#rotate2').click(function() {
+       location.reload();
+     });
+	/*reset the timer code ends here*/
+	
+	/*information code starts here*/
+	 function information(){
+	   var x = entries/5;
+	   var y = x/time;
+	   document.getElementById('wpm').innerHTML = "Gross WPM: "+Math.floor(y);
+	   nwpm1 = y - (wrong_entries/time);
+	   nwpm2 = ((entries/5) - wrong_entries)/time;
+	   document.getElementById('net-wpm').innerHTML = "Net WPM: "+Math.floor(nwpm2);
+	   acc = (entries / (entries + wrong_entries)) * 100;
+	   document.getElementById('accuracy').innerHTML = "Accuracy: "+Math.floor(acc)+"%";
+	 }
+	 
+	  $('#cutter').click(function() {
+       $('.modal').css("visibility","hidden");
+	   $('.work').css("filter","blur(0)");
+     });
+	/*information code ends here*/
+ </script>
+</html>
